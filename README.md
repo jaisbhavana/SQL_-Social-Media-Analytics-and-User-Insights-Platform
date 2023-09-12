@@ -35,4 +35,108 @@ Description: To identify celebrity users on the platform, you will query the dat
 **Task 10: Identify Unique User Behavior** <br>
 Description: In this task, you will find users who have exhibited unique engagement behavior. This includes users who have either never commented on any photo or have commented on every photo. Identifying such users can provide insights into diverse user behavior patterns on the platform.
 
+
+
+
+**################# ASSIGNNMENT SOLUTION ####################################################** <br><br>
+
+**# 1 Create an ER diagram or draw a schema for the given database.** <br><br>
+
+# 2 We want to reward the user who has been around the longest, Find the 5 oldest users.
+use ig_clone;<br><br>
+ 
+select * from comments;<br>
+select * from follows;<br>
+select * from likes;<br>
+select * from photo_tags;<br>
+select * from photos;<br>
+select * from tags;<br>
+select * from users;<br>
+ <br><br>
+ select * from users<br>
+ order by created_at<br>
+ limit 5;<br>
+ 
+**# 3 To understand when to  figure out the day of the week most users register on?** <br><br>
+select * from users;<br>
+select created_at, count(*) from users<br>
+group by 1<br>
+order by 2 desc;<br>
+
+
+**# 4 To target inactive users in an email ad campaign, find the users who have never posted a photo.** <br><br>
+select * from users;<br>
+select * from photos;<br>
+
+SELECT username<br>
+FROM users<br>
+LEFT JOIN photos ON users.id = photos.user_id<br>
+WHERE photos.id IS NULL;<br>
+
+
+**# 5 Suppose you are running a contest to find out who got the most likes on a photo. Find out who won?** <br><br>
+select * from likes ;<br>
+select * from photos;<br>
+select * from users;<br>
+<br>
+SELECT users.id, photos.id, photos.image_url, count(*) as Likes_on_photo from users<br>
+join photos on<br>
+	users.id = photos.id<br>
+join likes on<br>
+	photos.user_id = likes.user_id <br>
+group by photos.id<br>
+order by Likes_on_photo<br>
+limit 1;<br>
+
+**# 6 The investors want to know how many times does the average user post.** <br><br>
+select * from users;<br>
+select * from photos;<br>
+
+select users.username, count(photos.image_url) from users<br>
+join photos on<br>
+users.id = photos.id<br>
+group by users.id <br>
+order by 2 desc;<br>
+<br><br>
+
+**#7 A brand wants to know which hashtag to use on a post, and find the top 5 most used hashtags.** <br><br>
+
+select * from photo_tags;<br>
+select * from tags;<br>
+<br>
+select tags.tag_name, count(tag_name) as Total_hastag from tags<br><br>
+join photo_tags on<br>
+tags.id = photo_tags.tag_id<br>
+group by tags.id<br>
+order by Total_hastag;<br><br>
+<br><br>
+
+**# 8 To find out if there are bots, find users who have liked every single photo on the site.** <br>
+select * from users;<br>
+select * from likes;<br>
+
+select users.id, username, count(users.id) as Liked_every_single_photo from users<br>
+join likes on<br>
+users.id = likes.user_id <br>
+group by users.id<br>
+having Liked_every_single_photo = (select count(*) from photos);<br>
+
+
+**# 9 To know who the celebrities are, find users who have never commented on a photo.** <br><br>
+select * from users;<br>
+select * from comments;<br>
+<br>
+SELECT username,comment_text<br>
+FROM users<br>
+ LEFT JOIN comments ON users.id = comments.user_id<br>
+GROUP BY users.id<br>
+HAVING comment_text IS NULL;<br>
+
+**# 10 Now it's time to find both of them together,find the users who have never commented on any photo or have commented on every photo.** <br><br>
+
+ select * from users;<br>
+ select * from comments;<br>
+
+
+
 **These tasks require data querying and analysis skills, as well as the ability to draw insights from the database to inform various aspects of the platform, including user engagement, marketing campaigns, and content strategy.**
