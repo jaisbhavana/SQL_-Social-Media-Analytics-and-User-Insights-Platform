@@ -1,10 +1,10 @@
 # SQL_-Social-Media-Analytics-and-User-Insights-Platform
+<br><br>
+![ER diagram]([path-to-your-image.png](https://github.com/jaisbhavana/SQL_-Social-Media-Analytics-and-User-Insights-Platform/blob/main/ER_diagram%5B1%5D.png))
+ 
 
 
-
-
-
-
+<br><br>
 **Task 1: Create ER Diagram or Schema** <br>
 Description: In this task, you will design and create an Entity-Relationship (ER) diagram or a structured schema for the database. The diagram or schema should clearly define the database's tables, relationships between them, and the attributes each table contains. This visual representation is essential for understanding the database structure and its organization.<br>
 
